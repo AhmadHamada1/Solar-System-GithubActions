@@ -1,11 +1,11 @@
-name: Solar System Workflow
+name: 1-Unit Test & Code Coverage
 
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - 'feature/*'
+  # push:
+  #   branches:
+  #     - main
+  #     - 'feature/*'
     
 jobs:
   unit-testing:
