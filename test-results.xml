@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="5.069" tests="11" failures="0">
-  <testsuite name="Root Suite" timestamp="2024-12-28T05:54:00" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="5.191" tests="11" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-12-28T06:22:28" tests="0" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Planets API Suite" timestamp="2024-12-28T05:54:00" tests="0" file="/home/Hamada/solar-system/app-test.js" time="0.000" failures="0">
+  <testsuite name="Planets API Suite" timestamp="2024-12-28T06:22:28" tests="0" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Fetching Planet Details" timestamp="2024-12-28T05:54:00" tests="8" file="/home/Hamada/solar-system/app-test.js" time="5.044" failures="0">
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Mercury" time="3.459" classname="it should fetch a planet named Mercury">
+  <testsuite name="Fetching Planet Details" timestamp="2024-12-28T06:22:28" tests="8" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="5.110" failures="0">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Mercury" time="3.772" classname="it should fetch a planet named Mercury">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Venus" time="0.302" classname="it should fetch a planet named Venus">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Venus" time="0.197" classname="it should fetch a planet named Venus">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Earth" time="0.285" classname="it should fetch a planet named Earth">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Earth" time="0.279" classname="it should fetch a planet named Earth">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Mars" time="0.204" classname="it should fetch a planet named Mars">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Mars" time="0.159" classname="it should fetch a planet named Mars">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Jupiter" time="0.203" classname="it should fetch a planet named Jupiter">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Jupiter" time="0.193" classname="it should fetch a planet named Jupiter">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Satrun" time="0.207" classname="it should fetch a planet named Satrun">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Satrun" time="0.161" classname="it should fetch a planet named Satrun">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Uranus" time="0.211" classname="it should fetch a planet named Uranus">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Uranus" time="0.175" classname="it should fetch a planet named Uranus">
     </testcase>
-    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Neptune" time="0.162" classname="it should fetch a planet named Neptune">
-    </testcase>
-  </testsuite>
-  <testsuite name="Testing Other Endpoints" timestamp="2024-12-28T05:54:05" tests="0" file="/home/Hamada/solar-system/app-test.js" time="0.000" failures="0">
-  </testsuite>
-  <testsuite name="it should fetch OS Details" timestamp="2024-12-28T05:54:05" tests="1" file="/home/Hamada/solar-system/app-test.js" time="0.011" failures="0">
-    <testcase name="Testing Other Endpoints it should fetch OS Details it should fetch OS details" time="0.011" classname="it should fetch OS details">
+    <testcase name="Planets API Suite Fetching Planet Details it should fetch a planet named Neptune" time="0.161" classname="it should fetch a planet named Neptune">
     </testcase>
   </testsuite>
-  <testsuite name="it should fetch Live Status" timestamp="2024-12-28T05:54:05" tests="1" file="/home/Hamada/solar-system/app-test.js" time="0.008" failures="0">
-    <testcase name="Testing Other Endpoints it should fetch Live Status it checks Liveness endpoint" time="0.007" classname="it checks Liveness endpoint">
+  <testsuite name="Testing Other Endpoints" timestamp="2024-12-28T06:22:33" tests="0" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="it should fetch OS Details" timestamp="2024-12-28T06:22:33" tests="1" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="0.016" failures="0">
+    <testcase name="Testing Other Endpoints it should fetch OS Details it should fetch OS details" time="0.015" classname="it should fetch OS details">
     </testcase>
   </testsuite>
-  <testsuite name="it should fetch Ready Status" timestamp="2024-12-28T05:54:05" tests="1" file="/home/Hamada/solar-system/app-test.js" time="0.005" failures="0">
-    <testcase name="Testing Other Endpoints it should fetch Ready Status it checks Readiness endpoint" time="0.005" classname="it checks Readiness endpoint">
+  <testsuite name="it should fetch Live Status" timestamp="2024-12-28T06:22:33" tests="1" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="0.046" failures="0">
+    <testcase name="Testing Other Endpoints it should fetch Live Status it checks Liveness endpoint" time="0.045" classname="it checks Liveness endpoint">
+    </testcase>
+  </testsuite>
+  <testsuite name="it should fetch Ready Status" timestamp="2024-12-28T06:22:33" tests="1" file="/home/Hamada/Solar-System-GithubActions/app-test.js" time="0.018" failures="0">
+    <testcase name="Testing Other Endpoints it should fetch Ready Status it checks Readiness endpoint" time="0.017" classname="it checks Readiness endpoint">
     </testcase>
   </testsuite>
 </testsuites>
