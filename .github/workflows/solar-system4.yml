@@ -1,5 +1,5 @@
 
-name: 3-Unit Test & Code Coverage [Docker]
+name: 4-Package
 
 on: 
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
     name: Unit Testing
     strategy:
       matrix:
-        nodejs_version: [18, 19, 20]
+        nodejs_version: [18, 19]
         operating-system: [ubuntu-latest, macos-latest]
         exclude:
         - nodejs_version: 18
