@@ -3,15 +3,12 @@ name: 4-Package
 
 on: 
   workflow_dispatch:
-#   push:
-  #   branches:
-  #     - main
-  #     - 'feature/*'
-    
+
 env:
   MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
   MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
 jobs:
   unit-testing:
     name: Unit Testing
@@ -30,14 +27,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.nodejs_version }}
-    
       - name: Install Dependencies
         run: npm install
-  
       - name: Unit Testing
         id: unit-test-step
         run: npm test
-        
       - name: Archive Test Result
         if: failure() && (steps.unit-test-step.outcome == 'failure' || steps.unit-test-step.outcome == 'success')
         uses: actions/upload-artifact@v3
@@ -60,14 +54,13 @@ jobs:
       - name: Check Code Coverage
         continue-on-error: true
         run: npm run coverage
-      - name: Archive Test Result
+      - name: Archive Code Coverage Result
         uses: actions/upload-artifact@v3
         with:
           name: Code-Coverage-Result
           path: coverage
-          retention-days: 5      
-
-          
+          retention-days: 5
+  
   docker:
     name: Containerization
     needs: [unit-testing, code-coverage]
@@ -75,7 +68,7 @@ jobs:
       packages: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Dockerhub Login
         uses: docker/login-action@v2.2.0
@@ -86,16 +79,17 @@ jobs:
         uses: docker/login-action@v2.2.0
         with:
           registry: ghcr.io
-          username: ${{ vars.repository_owner }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Docker Build For Testing
+      - name: Docker Build and Push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: |
             ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
-            ghcr.io/${{ vars.repository_owner }}/solar-system:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+
 
 
 
