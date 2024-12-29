@@ -86,7 +86,7 @@ jobs:
         uses: docker/login-action@v2.2.0
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{ vars.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker Build For Testing
         uses: docker/build-push-action@v4
@@ -95,7 +95,7 @@ jobs:
           push: true
           tags: |
             ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
-            ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+            ghcr.io/${{ vars.repository_owner }}/solar-system:${{ github.sha }}
 
 
 
