@@ -18,7 +18,7 @@ jobs:
     name: Unit Testing
     strategy:
       matrix:
-        nodejs_version: [18]
+        nodejs_version: [19]
         operating-system: [ubuntu-latest]
     runs-on: ${{ matrix.operating-system }}
     steps:
@@ -71,7 +71,7 @@ jobs:
     needs: [unit-testing, code-coverage]
     permissions:
         packages: write
-        contents: read
+        contents: write
         id-token: write
     runs-on: ubuntu-latest
     steps:
