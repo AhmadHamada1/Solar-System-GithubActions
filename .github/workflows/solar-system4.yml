@@ -1,31 +1,143 @@
 
-#"name": "Solar System" package.json To  
-#  "name": "@Solar-System-GithubActions/solar-system",
-# "version": "6.7.6"
+name: 3-Unit Test & Code Coverage [Docker]
 
-name: 4-Packagess
-on:
-    workflow_dispatch:
-    release:
-      types: published
-  
+on: 
+  workflow_dispatch:
+#   push:
+  #   branches:
+  #     - main
+  #     - 'feature/*'
+    
+env:
+  MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 jobs:
-  test-publish-package:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+  unit-testing:
+    name: Unit Testing
+    strategy:
+      matrix:
+        nodejs_version: [18, 19, 20]
+        operating-system: [ubuntu-latest, macos-latest]
+        exclude:
+        - nodejs_version: 18
+          operating-system: macos-latest
+    runs-on: ${{ matrix.operating-system }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Setup NodeJS Version 20.x
-        uses: actions/setup-node@v4
+      - name: Setup NodeJS Version
+        uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: ${{ matrix.nodejs_version }}
+    
       - name: Install Dependencies
         run: npm install
-      - name: Publish to GitHub Registry
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+  
+      - name: Unit Testing
+        id: unit-test-step
+        run: npm test
+        
+      - name: Archive Test Result
+        if: failure() && (steps.unit-test-step.outcome == 'failure' || steps.unit-test-step.outcome == 'success')
+        uses: actions/upload-artifact@v3
+        with:
+          name: Mocha-Test-Result
+          path: test-results.xml
+    
+  code-coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup NodeJS Version 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: npm install
+      - name: Check Code Coverage
+        continue-on-error: true
+        run: npm run coverage
+      - name: Archive Test Result
+        uses: actions/upload-artifact@v3
+        with:
+          name: Code-Coverage-Result
+          path: coverage
+          retention-days: 5      
+
+          
+  docker:
+    name: Containerization
+    needs: [unit-testing, code-coverage]
+    permissions:
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Dockerhub Login
+        uses: docker/login-action@v2.2.0
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: GHCR Login
+        uses: docker/login-action@v2.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker Build For Testing
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #"name": "Solar System" package.json To  
+# #  "name": "@Solar-System-GithubActions/solar-system",
+# # "version": "6.7.6"
+
+# name: 4-Packagess
+# on:
+#     workflow_dispatch:
+#     release:
+#       types: published
+  
+# jobs:
+#   test-publish-package:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: write
+#       contents: read
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
+#       - name: Setup NodeJS Version 20.x
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           registry-url: 'https://npm.pkg.github.com'
+#       - name: Install Dependencies
+#         run: npm install
+#       - name: Publish to GitHub Registry
+#         run: npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
