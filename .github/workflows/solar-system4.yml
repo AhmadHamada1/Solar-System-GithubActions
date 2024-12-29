@@ -5,6 +5,7 @@
 
 name: 4-Packagess
 on:
+    workflow_dispatch:
     release:
       types: published
   
